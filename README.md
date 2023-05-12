@@ -29,13 +29,13 @@ GameDayMate is being developed to allow soccer enthusiasts to stay up to date wi
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/soccer-app.git
+   git clone https://github.com/your-username/gamedaymate.git
    ```
 
 2. Install the dependencies:
 
    ```bash
-   cd soccer-app
+   cd gamedaymate
    npm install
    ```
 
