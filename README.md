@@ -1,6 +1,6 @@
-# Soccer App (Work in Progress)
+# GameDayMate (Work in Progress)
 
-This is a soccer application that aims to provide live game updates, upcoming fixtures, team details, and more. The app is built using React and utilizes a soccer API to fetch the necessary data. Please note that this README is a work in progress and will be updated as the project evolves.
+This is a soccer fan application that aims to provide live game updates, upcoming fixtures, team details, and more. The app is built using React and utilizes a soccer API to fetch the necessary data. Please note that this README is a work in progress and will be updated as the project evolves.
 
 ## Table of Contents
 
@@ -10,10 +10,11 @@ This is a soccer application that aims to provide live game updates, upcoming fi
 - [Usage](#usage)
 - [API](#api)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## Description
 
-The Soccer App is being developed to allow soccer enthusiasts to stay up to date with live game scores, view upcoming fixtures, and explore information about their favorite teams and leagues. The application provides an intuitive user interface for a seamless user experience.
+GameDayMate is being developed to allow soccer enthusiasts to stay up to date with live game scores, view upcoming fixtures, and explore information about their favorite teams and leagues. The application provides an intuitive user interface for a seamless user experience.
 
 ## Features
 
@@ -22,7 +23,6 @@ The Soccer App is being developed to allow soccer enthusiasts to stay up to date
 - Team details: Explore information about soccer teams, including their logo, players, and recent performance.
 - Leagues: Discover different soccer leagues around the world and get league-specific data.
 - Email notifications: Ability to subscribe to email updates for favorite teams and upcoming matches.
-- [Add any other features or functionalities that you plan to implement]
 
 ## Installation
 
@@ -72,3 +72,7 @@ Replace `your-api-key` with the API key you obtained from API-Football.
 Please note that the API-Football API has usage limits and may require a paid subscription for certain features or higher usage levels. Refer to the API-Football documentation for more information on the available endpoints and data access.
 
 Remember to keep your API key secure and avoid committing it to version control systems or sharing it publicly.
+
+## License
+
+GameDayMate is open source and released under the [MIT License](https://opensource.org/licenses/MIT)
