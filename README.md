@@ -10,7 +10,6 @@ This is a soccer application that aims to provide live game updates, upcoming fi
 - [Usage](#usage)
 - [API](#api)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Description
 
@@ -32,3 +31,44 @@ The Soccer App is being developed to allow soccer enthusiasts to stay up to date
    ```bash
    git clone https://github.com/your-username/soccer-app.git
    ```
+
+2. Install the dependencies:
+
+   ```bash
+   cd soccer-app
+   npm install
+   ```
+
+## Installation
+
+1. Start the development server:
+
+```bash
+  npm start
+```
+
+2.  Start the development server:
+
+```bash
+  http://localhost:3000
+```
+
+## API
+
+This application utilizes the [API-Football API](https://www.api-football.com/) to fetch soccer data, including live game updates, fixtures, team details, and more. You will need an API key to access the data. Please sign up on the API-Football website to obtain your API key.
+
+To set up the API key for your Soccer App:
+
+1. Sign up on the [API-Football website](https://www.api-football.com/) and obtain your API key.
+2. Create a `.env` file in the root directory of your project.
+3. In the `.env` file, add the following line:
+
+```
+REACT_APP_API_KEY=your-api-key
+```
+
+Replace `your-api-key` with the API key you obtained from API-Football.
+
+Please note that the API-Football API has usage limits and may require a paid subscription for certain features or higher usage levels. Refer to the API-Football documentation for more information on the available endpoints and data access.
+
+Remember to keep your API key secure and avoid committing it to version control systems or sharing it publicly.
