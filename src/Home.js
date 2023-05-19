@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getLeagueByName } from './services/api';
 
-const ShowLiveFixtures = () => {
+const ShowLiveFixtures = ({ fixtures }) => {
 	return (
 		<div className='card text-center home-card'>
 			<h3 className='card-title'>Live Fixtures</h3>
@@ -44,7 +45,7 @@ const ShowLiveFixtures = () => {
 	);
 };
 
-const ShowTodaysFixtues = () => {
+const ShowTodaysFixtues = ({ fixtures }) => {
 	return (
 		<div className='card text-center home-card'>
 			<h3 className='card-title'>Today's Fixtures</h3>
@@ -87,7 +88,7 @@ const ShowTodaysFixtues = () => {
 		</div>
 	);
 };
-const ShowThisWeeksFixtures = () => {
+const ShowThisWeeksFixtures = ({ fixtures }) => {
 	return (
 		<div className='card text-center home-card'>
 			<h3 className='card-title'>This Week's Fixtures</h3>
@@ -132,14 +133,35 @@ const ShowThisWeeksFixtures = () => {
 };
 
 export default function Home() {
+	const [league, setLeague] = useState([]);
+
+	useEffect(() => {
+		const fetchLeague = async () => {
+			try {
+				const leagueData = await getLeagueByName('La Liga', 'Spain');
+				// Do further processing with the league data to get the live fixtures
+
+				setLeague(leagueData);
+				console.log({ leagueData });
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchLeague();
+	}, []);
+
 	return (
 		<div id='home'>
 			<h1>Matchday Mixtures</h1>
 			<p>Display live games, upcoming fixtures, and more.</p>
 			<div id='fixture-cards'>
-				<ShowLiveFixtures />
-				<ShowTodaysFixtues />
-				<ShowThisWeeksFixtures />
+				<ShowLiveFixtures fixtures={league} />{' '}
+				{/* Pass the live fixtures as props */}
+				<ShowTodaysFixtues fixtures={league} />{' '}
+				{/* Pass the live fixtures as props */}
+				<ShowThisWeeksFixtures fixtures={league} />{' '}
+				{/* Pass the live fixtures as props */}
 			</div>
 		</div>
 	);
