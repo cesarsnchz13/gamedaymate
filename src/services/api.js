@@ -22,8 +22,9 @@ async function makeApiRequest(path, params = {}) {
 	}
 }
 
-export async function getLeagueByName(leagueName, country = null) {
+export async function getLeagueByName(leagueName, country = null, reduxState) {
 	try {
+		console.log({ reduxState });
 		const apiCall = await makeApiRequest('leagues', {
 			country: country,
 			search: leagueName,

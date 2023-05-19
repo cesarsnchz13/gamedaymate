@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getLeagueByName } from './services/api';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchLeagues } from './actions/leagueActions';
 
 const ShowLiveFixtures = ({ fixtures }) => {
 	return (
@@ -133,7 +135,15 @@ const ShowThisWeeksFixtures = ({ fixtures }) => {
 };
 
 export default function Home() {
+	const leaguesData = useSelector((state) => state.leaguesData);
 	const [league, setLeague] = useState([]);
+
+	const dispatch = useDispatch();
+	console.log({ leaguesData });
+
+	useEffect(() => {
+		dispatch(fetchLeagues());
+	}, [dispatch]);
 
 	useEffect(() => {
 		const fetchLeague = async () => {

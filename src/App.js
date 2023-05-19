@@ -5,6 +5,8 @@ import {
 	Routes,
 	BrowserRouter,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import Home from './Home';
 import Leagues from './Leagues';
 import Teams from './Teams';
@@ -15,16 +17,18 @@ import Navbar from './Navbar';
 function App() {
 	return (
 		<>
-			<Navbar />
-			<BrowserRouter>
-				<Routes>
-					<Route exact path='/' element={<Home />} />
-					<Route path='/leagues' element={<Leagues />} />
-					<Route path='/teams' element={<Teams />} />
-					<Route path='/about' element={<About />} />
-					<Route component={<NotFound />} />
-				</Routes>
-			</BrowserRouter>
+			<Provider store={store}>
+				<Navbar />
+				<BrowserRouter>
+					<Routes>
+						<Route exact path='/' element={<Home />} />
+						<Route path='/leagues' element={<Leagues />} />
+						<Route path='/teams' element={<Teams />} />
+						<Route path='/about' element={<About />} />
+						<Route component={<NotFound />} />
+					</Routes>
+				</BrowserRouter>
+			</Provider>
 		</>
 	);
 }
