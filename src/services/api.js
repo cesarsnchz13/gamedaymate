@@ -22,10 +22,9 @@ async function makeApiRequest(path, params = {}) {
 	}
 }
 
-export async function getLeagueByName(leagueName, country = null) {
+export async function getLeagueByName(leagueName) {
 	try {
 		const apiCall = await makeApiRequest('leagues', {
-			country: country,
 			search: leagueName,
 		});
 		console.log(apiCall);
