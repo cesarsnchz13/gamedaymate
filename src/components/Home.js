@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getLeagueByName } from '../services/api';
+import { getLeagues } from '../services/api';
 
 const ShowLiveFixtures = ({ fixtures }) => {
 	return (
@@ -138,11 +138,11 @@ export default function Home() {
 	useEffect(() => {
 		const fetchLeague = async () => {
 			try {
-				const leagueData = await getLeagueByName('La Liga');
+				//!! May not even need this. Getting the fixtures and accessing them in the store is the most important
+				const leagueData = await getLeagues();
 				// Do further processing with the league data to get the live fixtures
 
 				setLeague(leagueData);
-				console.log(leagueData);
 			} catch (error) {
 				console.error(error);
 			}
