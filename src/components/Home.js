@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 // import fetchAndSetFixturesToStore from '../helpers/fetchAndSetFixturesToStore';
 import useFixtureStore from '../store/fixtureStore';
+import getMockData from '../helpers/getMockData';
 import {
 	getPremierLeagueFixtures,
 	getLaLigaFixtures,
@@ -152,25 +153,31 @@ export default function Home() {
 		setEuropaLeagueFixtures,
 	} = useFixtureStore();
 	useEffect(() => {
-		const fetchAndSetFixturesToStore = async () => {
-			const premierLeagueFixtures = await getPremierLeagueFixtures();
-			const laLigaFixtures = await getLaLigaFixtures();
-			const bundesligaFixtures = await getBundesligaFixtures();
-			const serieAFixtures = await getSerieAFixtures();
-			const championsLeagueFixtures = await getChampionsLeagueFixtures();
-			const europaLeagueFixtures = await getEuropaLeagueFixtures();
+		console.log(process.env.REACT_APP_ENV);
+		if (process.env.REACT_APP_ENV !== 'local') {
+			const fetchAndSetFixturesToStore = async () => {
+				const premierLeagueFixtures = await getPremierLeagueFixtures();
+				const laLigaFixtures = await getLaLigaFixtures();
+				const bundesligaFixtures = await getBundesligaFixtures();
+				const serieAFixtures = await getSerieAFixtures();
+				const championsLeagueFixtures = await getChampionsLeagueFixtures();
+				const europaLeagueFixtures = await getEuropaLeagueFixtures();
 
-			setPremierLeagueFixtures(premierLeagueFixtures);
-			setLaLigaFixtures(laLigaFixtures);
-			setBundesligaFixtures(bundesligaFixtures);
-			setSerieAFixtures(serieAFixtures);
-			setChampionsLeagueFixtures(championsLeagueFixtures);
-			setEuropaLeagueFixtures(europaLeagueFixtures);
-		};
-		fetchAndSetFixturesToStore();
+				setPremierLeagueFixtures(premierLeagueFixtures);
+				setLaLigaFixtures(laLigaFixtures);
+				setBundesligaFixtures(bundesligaFixtures);
+				setSerieAFixtures(serieAFixtures);
+				setChampionsLeagueFixtures(championsLeagueFixtures);
+				setEuropaLeagueFixtures(europaLeagueFixtures);
+			};
+			fetchAndSetFixturesToStore();
+		} else {
+			setPremierLeagueFixtures(getMockData().mockPremierLeagueFixtures);
+		}
 	}, []);
 
 	const { premierLeagueFixtures, laLigaFixtures } = useFixtureStore();
+	console.log(premierLeagueFixtures);
 
 	return (
 		<div id='home'>
