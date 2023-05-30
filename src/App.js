@@ -12,8 +12,52 @@ import Teams from './components/Teams';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import Navbar from './components/Navbar';
+import { useEffect } from 'react';
+import useFixtureStore from './store/FixtureStore';
+import {
+	getPremierLeagueFixtures,
+	getLaLigaFixtures,
+	getBundesligaFixtures,
+	getSerieAFixtures,
+	getChampionsLeagueFixtures,
+	getEuropaLeagueFixtures,
+} from './services/api';
+import getMockData from './helpers/getMockData';
 
 function App() {
+	const {
+		setPremierLeagueFixtures,
+		setLaLigaFixtures,
+		setBundesligaFixtures,
+		setSerieAFixtures,
+		setChampionsLeagueFixtures,
+		setEuropaLeagueFixtures,
+	} = useFixtureStore();
+
+	useEffect(() => {
+		console.log(process.env.REACT_APP_ENV);
+		if (process.env.REACT_APP_ENV !== 'local') {
+			const fetchAndSetFixturesToStore = async () => {
+				const premierLeagueFixtures = await getPremierLeagueFixtures();
+				const laLigaFixtures = await getLaLigaFixtures();
+				const bundesligaFixtures = await getBundesligaFixtures();
+				const serieAFixtures = await getSerieAFixtures();
+				const championsLeagueFixtures = await getChampionsLeagueFixtures();
+				const europaLeagueFixtures = await getEuropaLeagueFixtures();
+
+				setPremierLeagueFixtures(premierLeagueFixtures);
+				setLaLigaFixtures(laLigaFixtures);
+				setBundesligaFixtures(bundesligaFixtures);
+				setSerieAFixtures(serieAFixtures);
+				setChampionsLeagueFixtures(championsLeagueFixtures);
+				setEuropaLeagueFixtures(europaLeagueFixtures);
+			};
+			fetchAndSetFixturesToStore();
+		} else {
+			setPremierLeagueFixtures(getMockData().mockPremierLeagueFixtures);
+		}
+	}, []);
+
 	return (
 		<>
 			<Navbar />

@@ -1,17 +1,17 @@
-export class League {
+//TODO: be able to grab the data from the store to fufill some of these functions
+
+export default class League {
 	constructor(id) {
 		this.id = id;
 	}
 
-	async getLeagueInfo() {
-		// Implement logic to fetch league information by ID
-		// Return league information
-	}
+	name() {}
 
-	async getFixturesBySeason(season) {
-		// Implement logic to fetch fixtures by season
-		// Return fixtures for the specified season
-	}
+	country() {}
+
+	logo() {}
+
+	flag() {}
 
 	async getPastFixtures() {
 		// Implement logic to fetch past fixtures

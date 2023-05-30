@@ -1,62 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect } from 'react';
+import React from 'react';
 // import fetchAndSetFixturesToStore from '../helpers/fetchAndSetFixturesToStore';
-import useFixtureStore from '../store/fixtureStore';
-import getMockData from '../helpers/getMockData';
-import {
-	getPremierLeagueFixtures,
-	getLaLigaFixtures,
-	getBundesligaFixtures,
-	getSerieAFixtures,
-	getChampionsLeagueFixtures,
-	getEuropaLeagueFixtures,
-} from '../services/api';
+import useFixtureStore from '../store/FixtureStore';
+import League from '../utils/Leagues';
 
-const ShowLiveFixtures = ({ fixtures }) => {
-	return (
-		<div className='card text-center home-card'>
-			<h3 className='card-title'>Live Fixtures</h3>
-			<div className='card-body'>
-				<table className='table'>
-					<thead>
-						<tr>
-							<th scope='col'></th>
-							<th scope='col'>Home</th>
-							<th scope='col'></th>
-							<th scope='col'>Away</th>
-							<th scope='col'></th>
-						</tr>
-					</thead>
-					<tbody className='table-group-divider'>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	);
-};
+const premierLeague = new League(39);
+console.log(premierLeague);
 
-const ShowTodaysFixtues = ({ fixtures }) => {
+const FixtureCard = ({ fixtures }) => {
+	//todo: add logic that grabs
 	return (
 		<div className='card text-center home-card'>
 			<h3 className='card-title'>Today's Fixtures</h3>
@@ -64,7 +16,7 @@ const ShowTodaysFixtues = ({ fixtures }) => {
 				<table className='table'>
 					<thead>
 						<tr>
-							<th scope='col'></th>
+							<th scope='col'>League</th>
 							<th scope='col'>Home</th>
 							<th scope='col'></th>
 							<th scope='col'>Away</th>
@@ -79,63 +31,7 @@ const ShowTodaysFixtues = ({ fixtures }) => {
 							<td>FC Barcelona</td>
 							<td></td>
 						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	);
-};
-const ShowThisWeeksFixtures = ({ fixtures }) => {
-	return (
-		<div className='card text-center home-card'>
-			<h3 className='card-title'>This Week's Fixtures</h3>
-			<div className='card-body'>
-				<table className='table'>
-					<thead>
-						<tr>
-							<th scope='col'></th>
-							<th scope='col'>Home</th>
-							<th scope='col'></th>
-							<th scope='col'>Away</th>
-							<th scope='col'></th>
-						</tr>
-					</thead>
-					<tbody className='table-group-divider'>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
+						{/* todo:  table rows are dynamically created here from mapping through the fixtures array for the given league */}
 					</tbody>
 				</table>
 			</div>
@@ -144,39 +40,7 @@ const ShowThisWeeksFixtures = ({ fixtures }) => {
 };
 
 export default function Home() {
-	const {
-		setPremierLeagueFixtures,
-		setLaLigaFixtures,
-		setBundesligaFixtures,
-		setSerieAFixtures,
-		setChampionsLeagueFixtures,
-		setEuropaLeagueFixtures,
-	} = useFixtureStore();
-	useEffect(() => {
-		console.log(process.env.REACT_APP_ENV);
-		if (process.env.REACT_APP_ENV !== 'local') {
-			const fetchAndSetFixturesToStore = async () => {
-				const premierLeagueFixtures = await getPremierLeagueFixtures();
-				const laLigaFixtures = await getLaLigaFixtures();
-				const bundesligaFixtures = await getBundesligaFixtures();
-				const serieAFixtures = await getSerieAFixtures();
-				const championsLeagueFixtures = await getChampionsLeagueFixtures();
-				const europaLeagueFixtures = await getEuropaLeagueFixtures();
-
-				setPremierLeagueFixtures(premierLeagueFixtures);
-				setLaLigaFixtures(laLigaFixtures);
-				setBundesligaFixtures(bundesligaFixtures);
-				setSerieAFixtures(serieAFixtures);
-				setChampionsLeagueFixtures(championsLeagueFixtures);
-				setEuropaLeagueFixtures(europaLeagueFixtures);
-			};
-			fetchAndSetFixturesToStore();
-		} else {
-			setPremierLeagueFixtures(getMockData().mockPremierLeagueFixtures);
-		}
-	}, []);
-
-	const { premierLeagueFixtures, laLigaFixtures } = useFixtureStore();
+	const { premierLeagueFixtures } = useFixtureStore();
 	console.log(premierLeagueFixtures);
 
 	return (
@@ -184,9 +48,7 @@ export default function Home() {
 			<h1>Matchday Mixtures</h1>
 			<p>Display live games, upcoming fixtures, and more.</p>
 			<div id='fixture-cards'>
-				<ShowLiveFixtures /> {/* Pass the live fixtures as props */}
-				<ShowTodaysFixtues /> {/* Pass the live fixtures as props */}
-				<ShowThisWeeksFixtures /> {/* Pass the live fixtures as props */}
+				<FixtureCard /> {/* todo: have this be dynamic to whatever is mapped */}
 			</div>
 		</div>
 	);
