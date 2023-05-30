@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from 'react';
 // import fetchAndSetFixturesToStore from '../helpers/fetchAndSetFixturesToStore';
-import useFixtureStore from '../store/fixtureStore';
+import useFixtureStore from '../store/FixtureStore';
 import getMockData from '../helpers/getMockData';
 import {
 	getPremierLeagueFixtures,
