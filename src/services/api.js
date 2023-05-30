@@ -44,7 +44,7 @@ export async function getTeamsByLeague(leagueId) {
 
 export async function getFixturesByLeague(leagueId) {
 	try {
-		const apiCall = await makeApiRequest('v3', 'leagues', {
+		const apiCall = await makeApiRequest('v3', 'fixtures', {
 			league: leagueId,
 			season: 2022,
 		});
@@ -55,25 +55,25 @@ export async function getFixturesByLeague(leagueId) {
 }
 
 export async function getPremierLeagueFixtures() {
-	return getFixturesByLeague(39);
+	return getFixturesByLeague('39');
 }
 
 export async function getLaLigaFixtures() {
-	return getFixturesByLeague(140);
+	return getFixturesByLeague('140');
 }
 
 export async function getBundesligaFixtures() {
-	return getFixturesByLeague(78);
+	return getFixturesByLeague('78');
 }
 
 export async function getSerieAFixtures() {
-	return getFixturesByLeague(135);
+	return getFixturesByLeague('135');
 }
 
 export async function getChampionsLeagueFixtures() {
-	return getFixturesByLeague(2);
+	return getFixturesByLeague('2');
 }
 
 export async function getEuropaLeagueFixtures() {
-	return getFixturesByLeague(3);
+	return getFixturesByLeague('3');
 }

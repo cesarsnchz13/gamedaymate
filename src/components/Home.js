@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { getLeagues } from '../services/api';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect } from 'react';
+// import fetchAndSetFixturesToStore from '../helpers/fetchAndSetFixturesToStore';
+import useFixtureStore from '../store/fixtureStore';
+import {
+	getPremierLeagueFixtures,
+	getLaLigaFixtures,
+	getBundesligaFixtures,
+	getSerieAFixtures,
+	getChampionsLeagueFixtures,
+	getEuropaLeagueFixtures,
+} from '../services/api';
 
 const ShowLiveFixtures = ({ fixtures }) => {
 	return (
@@ -133,35 +143,43 @@ const ShowThisWeeksFixtures = ({ fixtures }) => {
 };
 
 export default function Home() {
-	const [league, setLeague] = useState([]);
-
+	const {
+		setPremierLeagueFixtures,
+		setLaLigaFixtures,
+		setBundesligaFixtures,
+		setSerieAFixtures,
+		setChampionsLeagueFixtures,
+		setEuropaLeagueFixtures,
+	} = useFixtureStore();
 	useEffect(() => {
-		const fetchLeague = async () => {
-			try {
-				//!! May not even need this. Getting the fixtures and accessing them in the store is the most important
-				const leagueData = await getLeagues();
-				// Do further processing with the league data to get the live fixtures
+		const fetchAndSetFixturesToStore = async () => {
+			const premierLeagueFixtures = await getPremierLeagueFixtures();
+			const laLigaFixtures = await getLaLigaFixtures();
+			const bundesligaFixtures = await getBundesligaFixtures();
+			const serieAFixtures = await getSerieAFixtures();
+			const championsLeagueFixtures = await getChampionsLeagueFixtures();
+			const europaLeagueFixtures = await getEuropaLeagueFixtures();
 
-				setLeague(leagueData);
-			} catch (error) {
-				console.error(error);
-			}
+			setPremierLeagueFixtures(premierLeagueFixtures);
+			setLaLigaFixtures(laLigaFixtures);
+			setBundesligaFixtures(bundesligaFixtures);
+			setSerieAFixtures(serieAFixtures);
+			setChampionsLeagueFixtures(championsLeagueFixtures);
+			setEuropaLeagueFixtures(europaLeagueFixtures);
 		};
-
-		fetchLeague();
+		fetchAndSetFixturesToStore();
 	}, []);
+
+	const { premierLeagueFixtures, laLigaFixtures } = useFixtureStore();
 
 	return (
 		<div id='home'>
 			<h1>Matchday Mixtures</h1>
 			<p>Display live games, upcoming fixtures, and more.</p>
 			<div id='fixture-cards'>
-				<ShowLiveFixtures fixtures={league} />{' '}
-				{/* Pass the live fixtures as props */}
-				<ShowTodaysFixtues fixtures={league} />{' '}
-				{/* Pass the live fixtures as props */}
-				<ShowThisWeeksFixtures fixtures={league} />{' '}
-				{/* Pass the live fixtures as props */}
+				<ShowLiveFixtures /> {/* Pass the live fixtures as props */}
+				<ShowTodaysFixtues /> {/* Pass the live fixtures as props */}
+				<ShowThisWeeksFixtures /> {/* Pass the live fixtures as props */}
 			</div>
 		</div>
 	);

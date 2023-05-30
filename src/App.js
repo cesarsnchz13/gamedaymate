@@ -6,12 +6,12 @@ import {
 	Routes,
 	BrowserRouter,
 } from 'react-router-dom';
-import Home from './Home';
-import Leagues from './Leagues';
-import Teams from './Teams';
-import About from './About';
-import NotFound from './NotFound';
-import Navbar from './Navbar';
+import Home from './components/Home';
+import Leagues from './components/Leagues';
+import Teams from './components/Teams';
+import About from './components/About';
+import NotFound from './components/NotFound';
+import Navbar from './components/Navbar';
 
 function App() {
 	return (
