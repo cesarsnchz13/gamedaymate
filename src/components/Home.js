@@ -1,17 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
-// import fetchAndSetFixturesToStore from '../helpers/fetchAndSetFixturesToStore';
+import React, { useEffect } from 'react';
 import useFixtureStore from '../store/FixtureStore';
 import League from '../utils/Leagues';
 
-const premierLeague = new League(39);
-console.log(premierLeague);
-
-const FixtureCard = ({ fixtures }) => {
-	//todo: add logic that grabs
+const FixtureCard = ({ fixtures, date }) => {
 	return (
 		<div className='card text-center home-card'>
-			<h3 className='card-title'>Today's Fixtures</h3>
+			<h3 className='card-title'>{date} Fixtures</h3>
 			<div className='card-body'>
 				<table className='table'>
 					<thead>
@@ -23,32 +18,52 @@ const FixtureCard = ({ fixtures }) => {
 							<th scope='col'></th>
 						</tr>
 					</thead>
-					<tbody className='table-group-divider'>
-						<tr>
-							<th></th>
-							<td>Real Madrid</td>
-							<td>v</td>
-							<td>FC Barcelona</td>
-							<td></td>
-						</tr>
-						{/* todo:  table rows are dynamically created here from mapping through the fixtures array for the given league */}
-					</tbody>
+					<tbody className='table-group-divider'>{fixtures()}</tbody>
 				</table>
 			</div>
 		</div>
 	);
 };
 
+const tableRows = (fixtures) => {
+	const rows = fixtures.map((fixture) => {
+		const homeTeam = fixture.teams.home.name;
+		const awayTeam = fixture.teams.away.name;
+
+		// Render each game and it's info
+		return (
+			<tr key={fixture.fixture.id}>
+				<th></th>
+				<td>{homeTeam}</td>
+				<td>v</td>
+				<td>{awayTeam}</td>
+				<td></td>
+			</tr>
+		);
+	});
+	return rows;
+};
+
 export default function Home() {
 	const { premierLeagueFixtures } = useFixtureStore();
-	console.log(premierLeagueFixtures);
+
+	useEffect(() => {
+		if (premierLeagueFixtures.length) {
+			const premierLeague = new League(39, premierLeagueFixtures);
+			console.log(premierLeague.name());
+			console.log(premierLeague.getPastFixtures());
+		}
+	}, [premierLeagueFixtures]);
 
 	return (
 		<div id='home'>
-			<h1>Matchday Mixtures</h1>
+			<h1>Matchday Fixtures</h1>
 			<p>Display live games, upcoming fixtures, and more.</p>
 			<div id='fixture-cards'>
-				<FixtureCard /> {/* todo: have this be dynamic to whatever is mapped */}
+				<FixtureCard
+					fixtures={() => tableRows(premierLeagueFixtures)}
+					date={'Previous'}
+				/>
 			</div>
 		</div>
 	);

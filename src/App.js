@@ -56,7 +56,14 @@ function App() {
 		} else {
 			setPremierLeagueFixtures(getMockData().mockPremierLeagueFixtures);
 		}
-	}, []);
+	}, [
+		setPremierLeagueFixtures,
+		setLaLigaFixtures,
+		setBundesligaFixtures,
+		setSerieAFixtures,
+		setChampionsLeagueFixtures,
+		setEuropaLeagueFixtures,
+	]);
 
 	return (
 		<>

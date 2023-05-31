@@ -480,7 +480,7 @@
 			"id": 867991,
 			"referee": "P. Bankes",
 			"timezone": "UTC",
-			"date": "2022-08-31T18:45:00+00:00",
+			"date": "2023-06-31T18:45:00+00:00",
 			"timestamp": 1661971500,
 			"periods": {
 				"first": 1661971500,
@@ -548,7 +548,7 @@
 			"id": 868324,
 			"referee": "R. Jones",
 			"timezone": "UTC",
-			"date": "2023-05-28T15:30:00+00:00",
+			"date": "2023-06-28T15:30:00+00:00",
 			"timestamp": 1685287800,
 			"periods": {
 				"first": 1685287800,
@@ -616,7 +616,7 @@
 			"id": 868325,
 			"referee": "D. England",
 			"timezone": "UTC",
-			"date": "2023-05-28T15:30:00+00:00",
+			"date": "2023-06-28T15:30:00+00:00",
 			"timestamp": 1685287800,
 			"periods": {
 				"first": 1685287800,

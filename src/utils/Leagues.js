@@ -1,31 +1,59 @@
 //TODO: be able to grab the data from the store to fufill some of these functions
 
 export default class League {
-	constructor(id) {
+	constructor(id, fixtures) {
 		this.id = id;
+		this.fixtures = fixtures;
 	}
 
-	name() {}
-
-	country() {}
-
-	logo() {}
-
-	flag() {}
-
-	async getPastFixtures() {
-		// Implement logic to fetch past fixtures
-		// Return past fixtures
+	name() {
+		const result = this.fixtures[0].league.name;
+		return result;
 	}
 
-	async getLiveFixtures() {
-		// Implement logic to fetch live fixtures
-		// Return live fixtures
+	country() {
+		return () => this.fixtures[0].league.country;
+	}
+
+	logo() {
+		return this.fixtures[0].league.logo;
+	}
+
+	flag() {
+		return this.fixtures[0].league.flag;
+	}
+
+	getPastFixtures() {
+		const currentDate = new Date();
+		const yesterday = currentDate.setDate(currentDate.getDate() - 1);
+		const pastFixtures = this.fixtures.filter((fixture) => {
+			const fixtureDate = new Date(fixture.fixture.date);
+			return fixtureDate < yesterday;
+		});
+		console.log({ pastFixtures });
+		return pastFixtures;
+	}
+
+	async getTodayFixtures() {
+		const currentDate = new Date();
+		const todayFixtures = this.fixtures.filter((fixture) => {
+			const fixtureDate = new Date(fixture.fixture.date);
+			return (
+				fixtureDate.getDate() === currentDate.getDate() &&
+				fixtureDate.getMonth() === currentDate.getMonth() &&
+				fixtureDate.getFullYear() === currentDate.getFullYear()
+			);
+		});
+		return todayFixtures;
 	}
 
 	async getFutureFixtures() {
-		// Implement logic to fetch future fixtures
-		// Return future fixtures
+		const currentDate = new Date();
+		const futureFixtures = this.fixtures.filter((fixture) => {
+			const fixtureDate = new Date(fixture.fixture.date);
+			return fixtureDate > currentDate;
+		});
+		return futureFixtures;
 	}
 
 	async getTeams() {
