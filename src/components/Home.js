@@ -1,6 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useFixtureStore from '../store/FixtureStore';
+import {
+	getPremierLeagueFixtures,
+	getLaLigaFixtures,
+	getBundesligaFixtures,
+	getSerieAFixtures,
+	getChampionsLeagueFixtures,
+	getEuropaLeagueFixtures,
+} from '../services/api';
 import League from '../utils/Leagues';
 
 const FixtureCard = ({ fixtures, date }) => {
@@ -33,7 +41,7 @@ const tableRows = (fixtures) => {
 		// Render each game and it's info
 		return (
 			<tr key={fixture.fixture.id}>
-				<th></th>
+				<th>LEAGUE NAME HERE</th>
 				<td>{homeTeam}</td>
 				<td>v</td>
 				<td>{awayTeam}</td>
@@ -45,15 +53,19 @@ const tableRows = (fixtures) => {
 };
 
 export default function Home() {
-	const { premierLeagueFixtures } = useFixtureStore();
+	const [premierLeagueFixtures, setPremierLeagueFixtures] = useState([]);
 
 	useEffect(() => {
-		if (premierLeagueFixtures.length) {
-			const premierLeague = new League(39, premierLeagueFixtures);
-			console.log(premierLeague.name());
-			console.log(premierLeague.getPastFixtures());
-		}
-	}, [premierLeagueFixtures]);
+		const setData = async () => {
+			const fix = await getPremierLeagueFixtures();
+			const premierLeague = new League(39, fix);
+			console.log(premierLeague);
+			setPremierLeagueFixtures(premierLeague.fixtures);
+		};
+		setData();
+	}, []);
+
+	console.log({ premierLeagueFixtures });
 
 	return (
 		<div id='home'>

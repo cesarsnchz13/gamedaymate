@@ -1,5 +1,3 @@
-//TODO: be able to grab the data from the store to fufill some of these functions
-
 export default class League {
 	constructor(id, fixtures) {
 		this.id = id;
